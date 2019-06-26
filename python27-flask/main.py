@@ -8,7 +8,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 app.debug = True
 
-networkJson = urlfetch.fetch("http://tokyo.fantasy-transit.appspot.com/net?format=json").content  # ウェブサイトから電車の線路情報をJSON形式でダウンロードする
+networkJson = urlfetch.fetch("https://tokyo.fantasy-transit.appspot.com/net?format=json").content  # ウェブサイトから電車の線路情報をJSON形式でダウンロードする
 network = json.loads(networkJson.decode('utf-8'))  # JSONとしてパースする（stringからdictのlistに変換する）
 
 @app.route('/')
@@ -22,12 +22,17 @@ def root():
 # これをパタトクカシーーを処理するようにしています。
 def pata():
   # とりあえずAとBをつなぐだけで返事を作っていますけど、パタタコカシーーになるように自分で直してください！
-  pata = request.args.get('a', '') + request.args.get('b', '')
+  #pata = request.args.get('a', '') + request.args.get('b', '')
+  patoka = request.args.get('a','')
+  takushi = request.args.get('b','')
+  for i, pa in enumerate(patoka):
+    pata += pa
+    pata += takushi[i]
   # pata.htmlのテンプレートの内容を埋め込んで、返事を返す。
   return render_template('pata.html', pata=pata)
 
 @app.route('/norikae')
 # /norikae のリクエスト（例えば http://localhost:8080/norikae ）をこの関数で処理する。
 # ここで乗り換え案内をするように編集してください。
-def norikae():
+def norikae(self):
   return render_template('norikae.html', network=network)
