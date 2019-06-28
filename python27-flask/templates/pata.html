@@ -1,9 +1,10 @@
 <body>
 	<h1>With a few tweaks, I can パタトクカシーー!</h1>
   <ul>
-    <li> a = {{request.args.get("a")}} </li>
-    <li> b = {{request.args.get("b")}} </li>
-    <li> a+b = {{pata}} </li>
+    <li> １つ目の入力 = {{request.args.get("a")}} </li>
+    <li> ２つ目の入力 = {{request.args.get("b")}} </li>
+    <li> １つ目の入力と２つ目の入力の文字数が異なっても構いません </li>
+    <li> {{request.args.get("a")}} + {{request.args.get("b")}} = {{pata}} </li>
 	<form>
 		<input type=text name=a>
 		<input type=text name=b>
